@@ -1,0 +1,948 @@
+guid: d45d0972-518f-4262-97ab-31b4625639b4
+liveboard:
+  name: Sentiment Analysis
+  description: Sentiment Analysis using Unstructured data -JSON - S3 bucket -> snowpark-python -> snowflake -> Thoughtspot
+  visualizations:
+  - id: Viz_1
+    answer:
+      name: Emotion distribution
+      tables:
+      - id: EMOTIONS
+        name: EMOTIONS
+      formulas:
+      - id: Emotion distribution
+        name: Emotion distribution
+        expr: "count ( [emotion] )"
+        was_auto_generated: false
+      search_query: "[emotion] [Emotion distribution]"
+      answer_columns:
+      - name: emotion
+      - name: Emotion distribution
+      table:
+        table_columns:
+        - column_id: emotion
+          show_headline: false
+        - column_id: Emotion distribution
+          show_headline: false
+        ordered_column_ids:
+        - emotion
+        - Emotion distribution
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: PIE
+        chart_columns:
+        - column_id: emotion
+        - column_id: Emotion distribution
+        axis_configs:
+        - x:
+          - emotion
+          "y":
+          - Emotion distribution
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"gridLines\": {},\"responsiveLayoutPreference\": \"USER_PREFERRED_ON\",\"chartSpecific\": {\"dataFieldArea\": \"column\"},\"showStackedLabels\": true,\"allLabels\": true},\"columnProperties\": [{\"columnId\": \"emotion\",\"columnProperty\": {}},{\"columnId\": \"Emotion distribution\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"2fdacdd9-cb11-442e-bdfc-27887d648e47\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Emotion distribution\"],\"isOpposite\": false}},{\"id\": \"6cf71275-eb68-434c-a334-de6e2cac1cb5\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"emotion\"]}}],\"seriesColors\": [{\"serieName\": \"02eee54b-e25f-4f5b-b6a6-9f46b8a28899\",\"color\": \"#FF8142\"},{\"serieName\": \"happy\",\"color\": \"#48D1E0\"},{\"serieName\": \"surprise\",\"color\": \"#2E75F0\"},{\"serieName\": \"angry\",\"color\": \"#F04152\"},{\"serieName\": \"Emotion distribution\",\"color\": \"#48D1E0\"},{\"serieName\": \"fear\",\"color\": \"#FCC838\"},{\"serieName\": \"sad\",\"color\": \"#8C62F5\"}],\"systemSeriesColors\": [{\"serieName\": \"02eee54b-e25f-4f5b-b6a6-9f46b8a28899\",\"color\": \"#FF8142\"},{\"serieName\": \"happy\",\"color\": \"#48D1E0\"},{\"serieName\": \"surprise\",\"color\": \"#2E75F0\"},{\"serieName\": \"fear\",\"color\": \"#FF8142\"},{\"serieName\": \"angry\",\"color\": \"#F04152\"},{\"serieName\": \"sad\",\"color\": \"#747E8C\"},{\"serieName\": \"Emotion distribution\",\"color\": \"#48D1E0\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 0f092541-28e6-4a5b-bc3b-eb78a35dd61f
+  - id: Viz_2
+    answer:
+      name: Overall Rating
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      formulas:
+      - id: Average rating
+        name: Average rating
+        expr: "sum ( [overall] ) / count ( [overall] )"
+        was_auto_generated: false
+      search_query: "[Average rating]"
+      answer_columns:
+      - name: Average rating
+        format:
+          category: NUMBER
+          numberFormatConfig:
+            unit: NONE
+            decimals: 2.0
+            negativeValueFormat: PREFIX_DASH
+            toSeparateThousands: true
+          isCategoryEditable: true
+      table:
+        table_columns:
+        - column_id: Average rating
+          headline_aggregation: TABLE_AGGR
+        ordered_column_ids:
+        - Average rating
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"Average rating\",\"columnProperty\": {}}]}"
+      chart:
+        type: KPI
+        chart_columns:
+        - column_id: Average rating
+        axis_configs:
+        - "y":
+          - Average rating
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"gridLines\": {},\"responsiveLayoutPreference\": \"USER_PREFERRED_ON\",\"chartSpecific\": {\"dataFieldArea\": \"column\"}},\"columnProperties\": [{\"columnId\": \"Average rating\",\"columnProperty\": {\"conditionalFormatting\": {\"rows\": [{\"operator\": \"GREATER_THAN\",\"value\": \"4\",\"plotAsBand\": false,\"fontProperties\": {\"color\": \"#049160\"}}]}}}],\"axisProperties\": [{\"id\": \"cd9cef44-7a03-4b57-a1c4-cae695c95795\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Average rating\"],\"isOpposite\": false}},{\"id\": \"45587e17-ff1c-47e4-a46a-8d1979cf79d4\",\"properties\": {\"axisType\": \"X\"}}],\"seriesColors\": [{\"serieName\": \"Average rating\",\"color\": \"#56D3A8\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: ea5027fc-5a97-4285-bcf5-84a233976ffb
+  - id: Viz_3
+    answer:
+      name: Sentiment breakdown
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      formulas:
+      - id: sentiment count
+        name: sentiment count
+        expr: "count ( [Vader Analysis] )"
+        was_auto_generated: false
+      - id: Average rating
+        name: Average rating
+        expr: "sum ( [overall] ) / count ( [overall] )"
+        was_auto_generated: false
+      search_query: "[Vader Analysis] [sentiment count]"
+      answer_columns:
+      - name: Vader Analysis
+      - name: sentiment count
+      table:
+        table_columns:
+        - column_id: Vader Analysis
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: sentiment count
+          headline_aggregation: AVERAGE
+        ordered_column_ids:
+        - Vader Analysis
+        - sentiment count
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"Vader Analysis\",\"columnProperty\": {}},{\"columnId\": \"sentiment count\",\"columnProperty\": {}}]}"
+      chart:
+        type: PIE
+        chart_columns:
+        - column_id: Vader Analysis
+        - column_id: sentiment count
+        axis_configs:
+        - x:
+          - Vader Analysis
+          "y":
+          - sentiment count
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"gridLines\": {},\"responsiveLayoutPreference\": \"USER_PREFERRED_ON\",\"chartSpecific\": {\"dataFieldArea\": \"column\"},\"showStackedLabels\": true,\"allLabels\": true},\"columnProperties\": [{\"columnId\": \"Vader Analysis\",\"columnProperty\": {}},{\"columnId\": \"sentiment count\",\"columnProperty\": {\"dataLabels\": true}}],\"axisProperties\": [{\"id\": \"165ac925-a19a-4926-a54b-c2576711d33d\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"sentiment count\"],\"isOpposite\": false}},{\"id\": \"2f9bc79a-d159-4a3b-9503-651b8dfe70cd\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Vader Analysis\"]}}],\"seriesColors\": [{\"serieName\": \"negative\",\"color\": \"#F04152\"},{\"serieName\": \"neutral\",\"color\": \"#FCC838\"},{\"serieName\": \"positive\",\"color\": \"#06BF7F\"}],\"systemSeriesColors\": [{\"serieName\": \"negative\",\"color\": \"#FCC838\"},{\"serieName\": \"neutral\",\"color\": \"#48D1E0\"},{\"serieName\": \"positive\",\"color\": \"#2E75F0\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: a7d80388-96a7-4cda-847e-5befafe18f4f
+  - id: Viz_4
+    answer:
+      name: "RaveReview Rank: The Top 30 Positively Praised Products\""
+      description: This curated chart showcases the most adored and highly recommended products by satisfied customers.
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      formulas:
+      - id: Percentage Count of Vader Analysis
+        name: Percentage Count of Vader Analysis
+        expr: "( count ( [Vader Analysis] ) / ( group_count ( [Vader Analysis] ) ) ) * 100"
+        was_auto_generated: false
+      search_query: "top 30 [Vader Analysis].positive [title]"
+      answer_columns:
+      - name: title
+      - name: Number of title
+      table:
+        table_columns:
+        - column_id: title
+          show_headline: false
+        - column_id: Number of title
+          show_headline: false
+        ordered_column_ids:
+        - title
+        - Number of title
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: title
+        - column_id: Number of title
+        axis_configs:
+        - x:
+          - title
+          "y":
+          - Number of title
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {}},\"columnProperties\": [{\"columnId\": \"title\",\"columnProperty\": {}},{\"columnId\": \"Number of title\",\"columnProperty\": {\"dataLabels\": true}}],\"axisProperties\": [{\"id\": \"bf781b71-444a-42ea-927a-531066270db9\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Number of title\"],\"name\": \"Number of reviews\",\"isOpposite\": false}},{\"id\": \"13decc32-bef9-4873-8979-058054c8e311\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"title\"],\"name\": \"Product\"}}],\"seriesColors\": [{\"serieName\": \"Number of title\",\"color\": \"#71A1F4\"}],\"systemSeriesColors\": [{\"serieName\": \"Number of title\",\"color\": \"#06BF7F\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 4baf1f3a-2872-4805-a9f2-bb76e6c4dafc
+  - id: Viz_5
+    answer:
+      name: Sentiment Shifts Across Categories
+      description: "Tracking Trends Over Time. Dive into a comprehensive analysis of sentiment trends, categorised by various sectors. Uncover how sentiments have evolved over time, offering valuable insights into the changing preferences and perceptions within different domains."
+      tables:
+      - id: CATEGORY_ANALYSIS
+        name: CATEGORY_ANALYSIS
+      search_query: "[Category] [Date] [Date].yearly count [Vader Analysis] [Vader Analysis] [Date] between [Date].01/01/2012 and [Date].12/30/2018"
+      answer_columns:
+      - name: Category
+      - name: Year(Date)
+      - name: Number of Vader Analysis
+      - name: Vader Analysis
+      table:
+        table_columns:
+        - column_id: Category
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Year(Date)
+          headline_aggregation: MIN-MAX
+        - column_id: Vader Analysis
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Number of Vader Analysis
+          headline_aggregation: AVERAGE
+        ordered_column_ids:
+        - Category
+        - Year(Date)
+        - Vader Analysis
+        - Number of Vader Analysis
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: STACKED_COLUMN
+        chart_columns:
+        - column_id: Category
+        - column_id: Year(Date)
+        - column_id: Vader Analysis
+        - column_id: Number of Vader Analysis
+        axis_configs:
+        - x:
+          - Vader Analysis
+          - Year(Date)
+          "y":
+          - Number of Vader Analysis
+          color:
+          - Category
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"USER_PREFERRED_ON\",\"chartSpecific\": {\"markersEnabled\": false},\"showStackedLabels\": true,\"allLabels\": true,\"legendPosition\": \"TOP_LEGEND\"},\"columnProperties\": [{\"columnId\": \"Category\",\"columnProperty\": {}},{\"columnId\": \"Year(Date)\",\"columnProperty\": {}},{\"columnId\": \"Vader Analysis\",\"columnProperty\": {}},{\"columnId\": \"Number of Vader Analysis\",\"columnProperty\": {\"dataLabels\": true}}],\"axisProperties\": [{\"id\": \"f624ca9c-173c-4955-a266-d10bff730a36\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Number of Vader Analysis\"],\"name\": \"Sentiment count\",\"isOpposite\": false}},{\"id\": \"df112aa4-8c6f-4036-b35e-d53a9af5cdef\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Vader Analysis\",\"Year(Date)\"],\"name\": \"Sentiment & Year\"}}],\"systemSeriesColors\": [{\"serieName\": \"bath & body\",\"color\": \"#B094F8\"},{\"serieName\": \"eye care\",\"color\": \"#8C62F5\"},{\"serieName\": \"hair care\",\"color\": \"#56D3A8\"},{\"serieName\": \"lip care\",\"color\": \"#06BF7F\"},{\"serieName\": \"men's grooming\",\"color\": \"#FCD977\"},{\"serieName\": \"nail care\",\"color\": \"#FCC838\"},{\"serieName\": \"natural & organic beauty\",\"color\": \"#82DFE9\"},{\"serieName\": \"others\",\"color\": \"#48D1E0\"},{\"serieName\": \"razors & razor blades\",\"color\": \"#71A1F4\"},{\"serieName\": \"skin care\",\"color\": \"#2E75F0\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 3e340a37-2e1c-4d3a-bbc5-ff70b76306b1
+  - id: Viz_6
+    answer:
+      name: Top brands liked by customers
+      description: Customer-Favorite Top Brands. Explore the brands that have won hearts and garnered high praise from customers.
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      search_query: "top 10 [Vader Analysis].positive [brand]"
+      answer_columns:
+      - name: brand
+      - name: Number of brand
+      table:
+        table_columns:
+        - column_id: brand
+          show_headline: false
+        - column_id: Number of brand
+          show_headline: false
+        ordered_column_ids:
+        - brand
+        - Number of brand
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: BAR
+        chart_columns:
+        - column_id: brand
+        - column_id: Number of brand
+        axis_configs:
+        - x:
+          - brand
+          "y":
+          - Number of brand
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"isStackedAsPercent\": false,\"stackedAsPercentFormat\": {\"category\": \"PERCENTAGE\",\"percentageFormatConfig\": {\"decimals\": 2.0,\"removeTrailingZeroes\": false},\"isCategoryEditable\": false}},\"showStackedLabels\": false},\"columnProperties\": [{\"columnId\": \"brand\",\"columnProperty\": {}},{\"columnId\": \"Number of brand\",\"columnProperty\": {\"dataLabels\": true}}],\"axisProperties\": [{\"id\": \"10ce3312-85e4-426f-996a-c8692671f71e\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"brand\"],\"name\": \"Brand\"}},{\"id\": \"5cf18257-73ce-42f8-9b34-c38b100c8146\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Number of brand\"],\"name\": \"Positive review count\",\"isOpposite\": false}}],\"seriesColors\": [{\"serieName\": \"gillette\",\"color\": \"#06BF7F\"},{\"serieName\": \"jubujub\",\"color\": \"#FCC838\"},{\"serieName\": \"philips norelco\",\"color\": \"#48D1E0\"},{\"serieName\": \"pre de provence\",\"color\": \"#2E75F0\"},{\"serieName\": \"neutral\",\"color\": \"#48D1E0\"},{\"serieName\": \"positive\",\"color\": \"#2E75F0\"},{\"serieName\": \"Number of brand\",\"color\": \"#56D3A8\"}],\"systemSeriesColors\": [{\"serieName\": \"gillette\",\"color\": \"#06BF7F\"},{\"serieName\": \"jubujub\",\"color\": \"#FCC838\"},{\"serieName\": \"philips norelco\",\"color\": \"#48D1E0\"},{\"serieName\": \"pre de provence\",\"color\": \"#2E75F0\"},{\"serieName\": \"Number of brand\",\"color\": \"#F47E89\"},{\"serieName\": \"neutral\",\"color\": \"#48D1E0\"},{\"serieName\": \"positive\",\"color\": \"#2E75F0\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: e032cf09-36a9-4b17-81f0-15c27f442886
+  - id: Viz_7
+    answer:
+      name: Sentiment changes over Time
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      search_query: "[Vader Sentiment] [Date].monthly [Date] between [Date].01/01/2012 and [Date].12/30/2018 [Vader Analysis]"
+      answer_columns:
+      - name: Total Vader Sentiment
+      - name: Month(Date)
+      - name: Vader Analysis
+      table:
+        table_columns:
+        - column_id: Month(Date)
+          headline_aggregation: MIN-MAX
+        - column_id: Vader Analysis
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Total Vader Sentiment
+          headline_aggregation: SUM
+        ordered_column_ids:
+        - Month(Date)
+        - Vader Analysis
+        - Total Vader Sentiment
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: AREA
+        chart_columns:
+        - column_id: Month(Date)
+        - column_id: Vader Analysis
+        - column_id: Total Vader Sentiment
+        axis_configs:
+        - x:
+          - Month(Date)
+          "y":
+          - Total Vader Sentiment
+          color:
+          - Vader Analysis
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"markersEnabled\": false},\"showStackedLabels\": false,\"allLabels\": false,\"legendPosition\": \"TOP_LEGEND\"},\"columnProperties\": [{\"columnId\": \"Vader Analysis\",\"columnProperty\": {}},{\"columnId\": \"Month(Date)\",\"columnProperty\": {}},{\"columnId\": \"Total Vader Sentiment\",\"columnProperty\": {\"dataLabels\": false}}],\"axisProperties\": [{\"id\": \"ef4e154f-7e46-4578-bb5d-974ab44ed47b\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Vader Sentiment\"],\"name\": \"Sentiment score\",\"isOpposite\": false}},{\"id\": \"2cbc6628-1112-4fb3-9eeb-c9b55ae6b61a\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Month(Date)\"],\"name\": \"Date\"}}],\"systemSeriesColors\": [{\"serieName\": \"negative\",\"color\": \"#FCC838\"},{\"serieName\": \"neutral\",\"color\": \"#48D1E0\"},{\"serieName\": \"positive\",\"color\": \"#2E75F0\"},{\"serieName\": \"Vader Analysis\",\"color\": \"#48d1e0\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 798a12ed-07ef-4689-b613-9854e081b5a1
+  - id: Viz_8
+    answer:
+      name: "Smart Suggestions: Tailored Product Recommendations from Top Polarity Scorers"
+      description: "a curated Recommended and Not Recommended items that align with preferences, as indicated by their strong positive or negative sentiment scores."
+      tables:
+      - id: RECOMMENDATIONS
+        name: RECOMMENDATIONS
+      search_query: "[brand] [Category] [Recommendation] [title] [brand].'2W International' [brand].3M [brand].47krate [brand].'A Size Above' [brand].AB [brand].ABCsell764 [brand].'Abercrombie & Fitch' [brand].Ableware [brand].'Absolute New York' [brand].AC [brand].'Acca Kappa' [brand].AccessCube [brand].ACCmall [brand].ACE [brand].'African Pride' [brand].'Air Wick' [brand].AKOAK [brand].Al-Rehab [brand].Atkins [brand].'Atlantic Importers' [brand].'ATLANTIC MERCHANDISING' [brand].ATOMY [brand].'Atomy America' [brand].Atopiko [brand].Atsugi [brand].'Attitude Line' [brand].Attrakt [brand].ATZEN [brand].'Aubrey Organics' [brand].Aubusson [brand].Audibel [brand].AUDISPRAY [brand].Aukmla [brand].'Aunt Sadies' [brand].Auperwel [brand].Aura [brand].'Aura by Silver Master' [brand].'Aura Cacia' [brand].'Aura Intense' [brand].'AVA Follow your Dream' [brand].'Avalon Organics' [brand].'AVALON ORGANIS' [brand].Aveda [brand].'AVENA KINESIA' [brand].AVENCREED [brand].Avon [brand].AW [brand].Axe [brand].'AXE PW' [brand].'AYA Cosmetics' [brand].Braun [brand].Brayson [brand].Braza [brand].'Bremenn Research Labs' [brand].Bridal's [brand].Catseye [brand].Caudalie [brand].Claire's [brand].Clairol [brand].Clarins [brand].'Classic Erotica' [brand].'Classica Erotica' [brand].CLEAN [brand].'Clean & Clear' [brand].'Etude House' [brand].'European Body Art' [brand].'European Soaps' [brand].'fashion fair' [brand].Gillette [brand].'Gillette Venus' [brand].GREENLEAF [brand].GreenLeafTech [brand].'Greenlight Collectibles' [brand].GreenPlanet-Organics [brand].Greenscape [brand].'Greenscape Homemade' [brand].Greenvida [brand].'Greenwich Bay' [brand].'Greenwich Bay Soap Company' [brand].'Greenwich Bay Trading Company' [brand].'Greenwich Bay Trading Company Soaps' [brand].Grimm [brand].Grinigh [brand].Hermitshell [brand].HERMS [brand].\"Hero's Pride\" [brand].Inc. [brand].'L.A. Colors' [brand].'Max Factor' [brand].Maybelline [brand].'MAYBELLINE INC.' [brand].'Maybelline New York' [brand].'Mayberry Health and Home' [brand].Oilily [brand].'Oils From India 5ml' [brand].'Oils From India 9.5ml' [brand].'Oils of Aloha' [brand].Ojon [brand].Okay [brand].Olay [brand].'Old Hoss' [brand].'Old Spice' [brand].'Old World Brushes' [brand].'Ole Henriksen' [brand].'Olive Essence' [brand].Olivella [brand].Olivia [brand].'Olivia Care' [brand].'Olivia Garden' [brand].Olivina [brand].'Olivina Napa Valley' [brand].Olympic [brand].'Perfectly Posh' [brand].Perfecto [brand].Perfectostore [brand].PERFEHAIR [brand].'Perfume Studio' [brand].PherX [brand].'Phi Naturals' [brand].Philips [brand].'Philips Norelco' [brand].'Philips Respironics' [brand].'Philips Sonicare' [brand].Phillips [brand].Philosophy [brand].Phisoderm [brand].Phiten [brand].Phitz [brand].Pixar [brand].Pixi [brand].Pixnor [brand].'Pixy Stix' [brand].Pjur [brand].'Pre de Provence' [brand].'Rainbow Loom' [brand].'Rainbow Research' [brand].'Ralph Lauren' [brand].'Ramnarine Enterprises Ltd.' [brand].Rampal-Latour [brand].'ReproFX Spirit' [brand].reskin [brand].'SEPHORA COLLECTION' [brand].'Shea Terra' [brand].'Shea Terra Organics' [brand].'Simply Botanical' [brand].'Simply Gorgeous' [brand].Skin2Spirit [brand].SKIN79 [brand].'St Moriz' [brand].'St. Ives' [brand].Thesis [brand].'thick shoe laces' [brand].'Thicker Fuller' [brand].'Thierry Mugler' [brand].ThinkMax [brand].Thinkpichaidai [brand].thinkThin [brand].Thirty-One [brand].'This Works' [brand].'Thistle Farms' [brand].'Tosca Style' [brand].'Total Body Naturals' [brand].totes [brand].TouchBack [brand].TOUCHBeauty [brand].TouchOfWhiteSmile [brand].TOULLGO [brand].TOULON [brand].TOUS [brand].Uni-ball [brand].Unicra [brand].UNIKO [brand].Unilever [brand].'Unilever HPC - USA' [brand].'Unilever Phils.' [brand].UNILEVER. [brand].Unilver [brand].'Vivo Per Lei' [brand].Vktech [brand].VLCC [brand].VO5 [brand].Voberry [brand].'Voesh Mani.Pedi-Cure System' [brand].'Zucker Feather Products' [brand].Zum [brand].'Zuzu Luxe' [brand].ZWZCYZ"
+      answer_columns:
+      - name: brand
+        custom_name: Brand
+      - name: Category
+      - name: Recommendation
+      - name: title
+        custom_name: Product
+      table:
+        table_columns:
+        - column_id: brand
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Category
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Recommendation
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: title
+          headline_aggregation: COUNT_DISTINCT
+        ordered_column_ids:
+        - brand
+        - Category
+        - Recommendation
+        - title
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"brand\",\"columnProperty\": {}},{\"columnId\": \"Category\",\"columnProperty\": {}},{\"columnId\": \"Recommendation\",\"columnProperty\": {}},{\"columnId\": \"title\",\"columnProperty\": {}}]}"
+      chart:
+        type: PIVOT_TABLE
+        chart_columns:
+        - column_id: brand
+        - column_id: Category
+        - column_id: Recommendation
+        - column_id: title
+        axis_configs:
+        - x:
+          - brand
+          "y":
+          - title
+          color:
+          - Recommendation
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotState\": {\"fields\": [{\"dataField\": \"Recommendation\",\"sortBy\": \"value\",\"sortBySummaryField\": \"\",\"sortOrder\": \"\",\"expanded\": true,\"area\": \"column\"},{\"dataField\": \"brand\",\"sortBy\": \"value\",\"sortBySummaryField\": \"brand\",\"sortOrder\": \"asc\",\"expanded\": true,\"area\": \"row\"}]}}},\"columnProperties\": [{\"columnId\": \"brand\",\"columnProperty\": {}},{\"columnId\": \"Category\",\"columnProperty\": {}},{\"columnId\": \"Recommendation\",\"columnProperty\": {}},{\"columnId\": \"title\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"fed643f6-51b9-407e-af15-bc4defc337a9\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"title\"],\"isOpposite\": false}},{\"id\": \"d64f2d8f-22d3-46e9-a1a8-018cdb5023bd\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"brand\"]}}]}"
+      display_mode: CHART_MODE
+    viz_guid: cf0d6786-fd98-4346-a6dc-87bc96e32cba
+  - id: Viz_9
+    answer:
+      name: Average Sentiment
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      search_query: "average [Vader Sentiment]"
+      answer_columns:
+      - name: Average Vader Sentiment
+      table:
+        table_columns:
+        - column_id: Average Vader Sentiment
+          headline_aggregation: TABLE_AGGR
+        ordered_column_ids:
+        - Average Vader Sentiment
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"Average Vader Sentiment\",\"columnProperty\": {}}]}"
+      chart:
+        type: KPI
+        chart_columns:
+        - column_id: Average Vader Sentiment
+        axis_configs:
+        - "y":
+          - Average Vader Sentiment
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"gridLines\": {},\"responsiveLayoutPreference\": \"USER_PREFERRED_ON\",\"chartSpecific\": {\"dataFieldArea\": \"column\"}},\"columnProperties\": [{\"columnId\": \"Average Vader Sentiment\",\"columnProperty\": {\"conditionalFormatting\": {\"rows\": [{\"operator\": \"GREATER_THAN\",\"value\": \"0\",\"plotAsBand\": false,\"fontProperties\": {\"color\": \"#049160\"}}]}}}],\"axisProperties\": [{\"id\": \"99507cfe-e6df-453b-9281-eff73991e649\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Average Vader Sentiment\"],\"isOpposite\": false}},{\"id\": \"fc73c7a9-bb35-4b22-a937-bb8e855eea75\",\"properties\": {\"axisType\": \"X\"}}],\"seriesColors\": [{\"serieName\": \"Average Vader Sentiment\",\"color\": \"#56D3A8\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: d82d2e21-282b-4097-b3ba-422308fb8375
+  - id: Viz_10
+    answer:
+      name: "Annual Sentiment Trends: Unveiling Emotions Over Time"
+      description: This concise chart provides a comprehensive overview of changing emotional trends on a yearly basis through sentiment analysis. By plotting average sentiment scores and associated sentiments. This visualisation serves as a valuable tool for understanding the shifting emotional landscape and gaining insights into the predominant sentiments that have marked each year.
+      tables:
+      - id: CATEGORY_ANALYSIS
+        name: CATEGORY_ANALYSIS
+      search_query: "[Date] [Date].yearly average [Vader Sentiment] [Vader Analysis] [Vader Sentiment] [Date] on or after '01/01/2012'"
+      answer_columns:
+      - name: Year(Date)
+      - name: Average Vader Sentiment
+      - name: Vader Analysis
+      - name: Total Vader Sentiment
+      table:
+        table_columns:
+        - column_id: Year(Date)
+          headline_aggregation: MIN-MAX
+        - column_id: Vader Analysis
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Average Vader Sentiment
+          headline_aggregation: TABLE_AGGR
+        - column_id: Total Vader Sentiment
+          headline_aggregation: SUM
+        ordered_column_ids:
+        - Year(Date)
+        - Vader Analysis
+        - Average Vader Sentiment
+        - Total Vader Sentiment
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: LINE_STACKED_COLUMN
+        chart_columns:
+        - column_id: Year(Date)
+        - column_id: Vader Analysis
+        - column_id: Average Vader Sentiment
+        - column_id: Total Vader Sentiment
+        axis_configs:
+        - x:
+          - Year(Date)
+          "y":
+          - Total Vader Sentiment
+          color:
+          - Vader Analysis
+        - x:
+          - Year(Date)
+          "y":
+          - Average Vader Sentiment
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"isStackedAsPercent\": false,\"stackedAsPercentFormat\": {\"category\": \"PERCENTAGE\",\"percentageFormatConfig\": {\"decimals\": 2.0,\"removeTrailingZeroes\": false},\"isCategoryEditable\": false}},\"showStackedLabels\": false,\"allLabels\": false,\"legendPosition\": \"BOTTOM_LEGEND\"},\"columnProperties\": [{\"columnId\": \"Year(Date)\",\"columnProperty\": {}},{\"columnId\": \"Vader Analysis\",\"columnProperty\": {}},{\"columnId\": \"Average Vader Sentiment\",\"columnProperty\": {\"dataLabels\": true}},{\"columnId\": \"Total Vader Sentiment\",\"columnProperty\": {\"dataLabels\": false}}],\"axisProperties\": [{\"id\": \"6f77b4fb-8bc0-450a-99bf-269f9f0047b9\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Average Vader Sentiment\"],\"name\": \"Average Sentiment / Polarity Score\",\"isOpposite\": false}},{\"id\": \"4bb76bd0-ad11-4e99-b2ab-5337ca2accb0\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Vader Sentiment\"],\"name\": \"Sentiment / Polarity score\",\"isOpposite\": true}},{\"id\": \"dcc831da-606a-465e-a529-c0fe0fb60ecc\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Year(Date)\"],\"name\": \"Year\"}}],\"seriesColors\": [{\"serieName\": \"negative\",\"color\": \"#06BF7F\"},{\"serieName\": \"neutral\",\"color\": \"#FCC838\"},{\"serieName\": \"positive\",\"color\": \"#48D1E0\"},{\"serieName\": \"total vader sentiment\",\"color\": \"#2E75F0\"},{\"serieName\": \"average vader sentiment\",\"color\": \"#747E8C\"}],\"systemSeriesColors\": [{\"serieName\": \"negative\",\"color\": \"#06BF7F\"},{\"serieName\": \"neutral\",\"color\": \"#FCC838\"},{\"serieName\": \"positive\",\"color\": \"#48D1E0\"},{\"serieName\": \"total vader sentiment\",\"color\": \"#2E75F0\"},{\"serieName\": \"average vader sentiment\",\"color\": \"#2E75F0\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 25660ba6-d0a7-4647-97d6-8f22da789aac
+  - id: Viz_11
+    answer:
+      name: "BottomRated Products: The 20 Most Criticized Products"
+      description: "Spotlight on Disapproved: 20 Criticised Products. Unveiling the products that have faced substantial criticism, this list sheds light on the most negatively reviewed products. Gain insights into their challenges and consider these cautionary tales as you navigate consumer choices."
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      search_query: "top 20 by count [brand] [Vader Analysis].negative [title]"
+      answer_columns:
+      - name: Number of brand
+      - name: title
+      table:
+        table_columns:
+        - column_id: title
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Number of brand
+          headline_aggregation: AVERAGE
+        ordered_column_ids:
+        - title
+        - Number of brand
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: BAR
+        chart_columns:
+        - column_id: title
+        - column_id: Number of brand
+        axis_configs:
+        - x:
+          - title
+          "y":
+          - Number of brand
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"gridLines\": {\"xGridlineEnabled\": false,\"yGridlineEnabled\": false},\"responsiveLayoutPreference\": \"AUTO_ON\",\"showLinearRegressionLine\": false,\"chartSpecific\": {}},\"columnProperties\": [{\"columnId\": \"title\",\"columnProperty\": {}},{\"columnId\": \"Number of brand\",\"columnProperty\": {\"dataLabels\": false}}],\"axisProperties\": [{\"id\": \"e0a609d5-bbfd-4986-9f7e-a9ea76ba6688\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"title\"],\"name\": \"Product\"}},{\"id\": \"a094b4ac-1bd1-4e3a-943a-5ee6824604b2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Number of brand\"],\"name\": \"Negative review count\",\"isOpposite\": false}}],\"seriesColors\": [{\"serieName\": \"2a35c528-a77b-5c95-aaa5-f61c49b528a7\",\"color\": \"#06BF7F\"},{\"serieName\": \"Number of brand\",\"color\": \"#F47E89\"}],\"systemSeriesColors\": [{\"serieName\": \"2a35c528-a77b-5c95-aaa5-f61c49b528a7\",\"color\": \"#06BF7F\"},{\"serieName\": \"Number of brand\",\"color\": \"#747E8C\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 02bba3ef-cef0-4284-9fe8-2426902a7a53
+  - id: Viz_12
+    answer:
+      name: Number of reviews
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      search_query: "count [reviewText]"
+      answer_columns:
+      - name: Number of reviewText
+        format:
+          category: NUMBER
+          numberFormatConfig:
+            unit: THOUSANDS
+            decimals: 2.0
+            negativeValueFormat: PREFIX_DASH
+            toSeparateThousands: true
+          isCategoryEditable: true
+      table:
+        table_columns:
+        - column_id: Number of reviewText
+          show_headline: false
+        ordered_column_ids:
+        - Number of reviewText
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"Number of reviewText\",\"columnProperty\": {}}]}"
+      chart:
+        type: KPI
+        chart_columns:
+        - column_id: Number of reviewText
+        axis_configs:
+        - "y":
+          - Number of reviewText
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"gridLines\": {},\"responsiveLayoutPreference\": \"USER_PREFERRED_ON\",\"chartSpecific\": {\"dataFieldArea\": \"column\"}},\"columnProperties\": [{\"columnId\": \"Number of reviewText\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"556e580f-7291-442c-b939-256b75349290\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Number of reviewText\"],\"isOpposite\": false}},{\"id\": \"07b27336-0a1d-44a1-9dfa-b118c4e44216\",\"properties\": {\"axisType\": \"X\"}}]}"
+      display_mode: CHART_MODE
+    viz_guid: 1e1a50cc-949a-4bff-a4c8-71d73a357882
+  - id: Viz_13
+    viz_guid: 962345fc-7043-476d-8599-23516aa04a7a
+    note_tile:
+      html_parsed_string: <h1><img id="ea3ecf3e-90f7-475d-b67a-df53f0e66cf2" alt="UPLOAD" height="159" width="371"></h1><p class="theme-module__editor-paragraph"><br></p>
+  - id: Viz_14
+    answer:
+      name: "Textual Impact: Review Length vs. Sentiment Polarity"
+      description: "Unraveling Emotions: Analyzing Sentiments Across Varying Review Lengths"
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      search_query: "[review_bin] count [Vader Analysis] [Vader Analysis]"
+      answer_columns:
+      - name: review_bin
+      - name: Number of Vader Analysis
+      - name: Vader Analysis
+      table:
+        table_columns:
+        - column_id: review_bin
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Vader Analysis
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Number of Vader Analysis
+          headline_aggregation: AVERAGE
+        ordered_column_ids:
+        - review_bin
+        - Vader Analysis
+        - Number of Vader Analysis
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: review_bin
+        - column_id: Vader Analysis
+        - column_id: Number of Vader Analysis
+        axis_configs:
+        - x:
+          - review_bin
+          "y":
+          - Number of Vader Analysis
+          color:
+          - Vader Analysis
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {},\"showStackedLabels\": true,\"allLabels\": true,\"legendPosition\": \"TOP_LEGEND\"},\"columnProperties\": [{\"columnId\": \"review_bin\",\"columnProperty\": {}},{\"columnId\": \"Vader Analysis\",\"columnProperty\": {}},{\"columnId\": \"Number of Vader Analysis\",\"columnProperty\": {\"dataLabels\": true}}],\"axisProperties\": [{\"id\": \"b2c1fcfd-9397-4adb-99b6-e320188cff22\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"review_bin\"],\"name\": \"Review length \"}},{\"id\": \"e890cf8d-2c5f-496d-a30a-73bdacaaa28d\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Number of Vader Analysis\"],\"name\": \"Polarity count\",\"isOpposite\": false}}],\"systemSeriesColors\": [{\"serieName\": \"negative\",\"color\": \"#FCC838\"},{\"serieName\": \"neutral\",\"color\": \"#48D1E0\"},{\"serieName\": \"positive\",\"color\": \"#2E75F0\"},{\"serieName\": \"Number of Vader Analysis\",\"color\": \"#48D1E0\"},{\"serieName\": \"0-100\",\"color\": \"#06BF7F\"},{\"serieName\": \"100-500\",\"color\": \"#FCC838\"},{\"serieName\": \"1000-5000\",\"color\": \"#82DFE9\"},{\"serieName\": \"500-1000\",\"color\": \"#48D1E0\"},{\"serieName\": \"5000-10000\",\"color\": \"#71A1F4\"},{\"serieName\": \">10000\",\"color\": \"#2E75F0\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: f84d0f73-0cf0-401d-aadb-2be7dbf9c203
+  - id: Viz_15
+    answer:
+      name: Review distribution across years
+      tables:
+      - id: BEAUTY_PRODUCT_REVIEWS
+        name: BEAUTY_PRODUCT_REVIEWS
+      search_query: "count [reviewText] [Date].yearly"
+      answer_columns:
+      - name: Number of reviewText
+      - name: Year(Date)
+      table:
+        table_columns:
+        - column_id: Year(Date)
+          headline_aggregation: MIN-MAX
+        - column_id: Number of reviewText
+          headline_aggregation: AVERAGE
+        ordered_column_ids:
+        - Year(Date)
+        - Number of reviewText
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: WATERFALL
+        chart_columns:
+        - column_id: Year(Date)
+        - column_id: Number of reviewText
+        axis_configs:
+        - x:
+          - Year(Date)
+          "y":
+          - Number of reviewText
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {}},\"columnProperties\": [{\"columnId\": \"Year(Date)\",\"columnProperty\": {}},{\"columnId\": \"Number of reviewText\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"475e32c7-078a-4a96-a7d7-6e5ceb836fe0\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Year(Date)\"],\"name\": \"Year\"}},{\"id\": \"8e9cefc7-7360-4889-9645-14f8bbfb9c94\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Number of reviewText\"],\"name\": \"Number of reviews\",\"isOpposite\": false}}],\"systemSeriesColors\": [{\"serieName\": \"Number of reviewText\",\"color\": \"#2E75F0\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 304b62b5-1a6b-4cea-a4e9-c1d933afcaa6
+  - id: Viz_16
+    viz_guid: abb3143b-3b0c-4986-9d33-3d305be2b665
+    note_tile:
+      html_parsed_string: <h1><img id="bb4559d0-99c9-4095-8d18-9e3b3f72ffc0" alt="UPLOAD" height="297.53091577540107" width="579"></h1>
+  - id: Viz_17
+    answer:
+      name: Total Count Brand by Title
+      tables:
+      - id: WS-Beauty Product Reviews
+        name: WS-Beauty Product Reviews
+      search_query: "count [Brand] [Brand].Crest by [Title]"
+      answer_columns:
+      - name: Number of Brand
+      - name: Title
+      table:
+        table_columns:
+        - column_id: Title
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: Number of Brand
+          headline_aggregation: AVERAGE
+        ordered_column_ids:
+        - Title
+        - Number of Brand
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: Title
+        - column_id: Number of Brand
+        axis_configs:
+        - x:
+          - Title
+          "y":
+          - Number of Brand
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"Number of Brand\",\"columnProperty\": {}},{\"columnId\": \"Title\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"8685fc63-4984-4406-bc43-13e99e48d123\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Number of Brand\"],\"isOpposite\": false}},{\"id\": \"4340869f-2cbf-4a38-be33-8db646944451\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Title\"]}}],\"systemSeriesColors\": [{\"serieName\": \"Number of Brand\",\"color\": \"#48D1E0\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: c4462b95-23ee-4294-9a98-54d9a54dacd3
+  - id: Viz_18
+    answer:
+      name: sentiment count by Title
+      tables:
+      - id: WS-Beauty Product Reviews
+        name: WS-Beauty Product Reviews
+      search_query: "[sentiment count] [Brand].Crest by [Title]"
+      answer_columns:
+      - name: sentiment count
+      - name: Title
+      table:
+        table_columns:
+        - column_id: Title
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: sentiment count
+          headline_aggregation: SUM
+        ordered_column_ids:
+        - Title
+        - sentiment count
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: Title
+        - column_id: sentiment count
+        axis_configs:
+        - x:
+          - Title
+          "y":
+          - sentiment count
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"sentiment count\",\"columnProperty\": {}},{\"columnId\": \"Title\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"d8946017-c2f4-4c8f-9d9b-96e586e87278\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"sentiment count\"],\"isOpposite\": false}},{\"id\": \"b237d9c9-3cbc-4a1d-9f86-f6790d1a9bac\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Title\"]}}],\"systemSeriesColors\": [{\"serieName\": \"sentiment count\",\"color\": \"#06BF7F\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 2ecbc19e-5867-4190-a68c-d79ca8ae8767
+  - id: Viz_19
+    answer:
+      name: sentiment count by Title
+      tables:
+      - id: WS-Beauty Product Reviews
+        name: WS-Beauty Product Reviews
+      search_query: "[sentiment count] [Brand].Crest by [Title]"
+      answer_columns:
+      - name: sentiment count
+      - name: Title
+      table:
+        table_columns:
+        - column_id: Title
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: sentiment count
+          headline_aggregation: SUM
+        ordered_column_ids:
+        - Title
+        - sentiment count
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: Title
+        - column_id: sentiment count
+        axis_configs:
+        - x:
+          - Title
+          "y":
+          - sentiment count
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"sentiment count\",\"columnProperty\": {}},{\"columnId\": \"Title\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"d8946017-c2f4-4c8f-9d9b-96e586e87278\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"sentiment count\"],\"isOpposite\": false}},{\"id\": \"b237d9c9-3cbc-4a1d-9f86-f6790d1a9bac\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Title\"]}}],\"systemSeriesColors\": [{\"serieName\": \"sentiment count\",\"color\": \"#06BF7F\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: fe5bb3f1-340c-490b-83cc-89f30dbb8ebe
+  - id: Viz_20
+    answer:
+      name: sentiment count by Title
+      tables:
+      - id: WS-Beauty Product Reviews
+        name: WS-Beauty Product Reviews
+      search_query: "[sentiment count] [Brand].Crest by [Title]"
+      answer_columns:
+      - name: sentiment count
+      - name: Title
+      table:
+        table_columns:
+        - column_id: Title
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: sentiment count
+          headline_aggregation: SUM
+        ordered_column_ids:
+        - Title
+        - sentiment count
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: Title
+        - column_id: sentiment count
+        axis_configs:
+        - x:
+          - Title
+          "y":
+          - sentiment count
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"sentiment count\",\"columnProperty\": {}},{\"columnId\": \"Title\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b13afa99-9d54-4a64-8300-5afd51c9a2c0\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"sentiment count\"],\"isOpposite\": false}},{\"id\": \"9d59d1a7-b592-48bf-a4c7-eb3895c1c156\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Title\"]}}],\"systemSeriesColors\": [{\"serieName\": \"sentiment count\",\"color\": \"#8C62F5\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 66b604b6-c7ac-49e6-b9f6-05edb1410988
+  - id: Viz_21
+    answer:
+      name: sentiment count by Title
+      tables:
+      - id: WS-Beauty Product Reviews
+        name: WS-Beauty Product Reviews
+      search_query: "[sentiment count] [Brand].Crest by [Title]"
+      answer_columns:
+      - name: sentiment count
+      - name: Title
+      table:
+        table_columns:
+        - column_id: Title
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: sentiment count
+          headline_aggregation: SUM
+        ordered_column_ids:
+        - Title
+        - sentiment count
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: Title
+        - column_id: sentiment count
+        axis_configs:
+        - x:
+          - Title
+          "y":
+          - sentiment count
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"sentiment count\",\"columnProperty\": {}},{\"columnId\": \"Title\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b13afa99-9d54-4a64-8300-5afd51c9a2c0\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"sentiment count\"],\"isOpposite\": false}},{\"id\": \"9d59d1a7-b592-48bf-a4c7-eb3895c1c156\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Title\"]}}],\"systemSeriesColors\": [{\"serieName\": \"sentiment count\",\"color\": \"#8C62F5\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 8a34079e-4399-4f25-90c9-0149dff8ff53
+  - id: Viz_22
+    answer:
+      name: sentiment count by Title
+      tables:
+      - id: WS-Beauty Product Reviews
+        name: WS-Beauty Product Reviews
+      search_query: "[sentiment count] [Brand].Crest by [Title]"
+      answer_columns:
+      - name: sentiment count
+      - name: Title
+      table:
+        table_columns:
+        - column_id: Title
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: sentiment count
+          headline_aggregation: SUM
+        ordered_column_ids:
+        - Title
+        - sentiment count
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: Title
+        - column_id: sentiment count
+        axis_configs:
+        - x:
+          - Title
+          "y":
+          - sentiment count
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"sentiment count\",\"columnProperty\": {}},{\"columnId\": \"Title\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b13afa99-9d54-4a64-8300-5afd51c9a2c0\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"sentiment count\"],\"isOpposite\": false}},{\"id\": \"9d59d1a7-b592-48bf-a4c7-eb3895c1c156\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Title\"]}}],\"systemSeriesColors\": [{\"serieName\": \"sentiment count\",\"color\": \"#8C62F5\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 6bba3b32-00e9-4ce1-ad93-062dd8733c54
+  - id: Viz_23
+    answer:
+      name: sentiment count by Title
+      tables:
+      - id: WS-Beauty Product Reviews
+        name: WS-Beauty Product Reviews
+      search_query: "[sentiment count] [Brand].Crest by [Title]"
+      answer_columns:
+      - name: sentiment count
+      - name: Title
+      table:
+        table_columns:
+        - column_id: Title
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: sentiment count
+          headline_aggregation: SUM
+        ordered_column_ids:
+        - Title
+        - sentiment count
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: Title
+        - column_id: sentiment count
+        axis_configs:
+        - x:
+          - Title
+          "y":
+          - sentiment count
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"sentiment count\",\"columnProperty\": {}},{\"columnId\": \"Title\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b13afa99-9d54-4a64-8300-5afd51c9a2c0\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"sentiment count\"],\"isOpposite\": false}},{\"id\": \"9d59d1a7-b592-48bf-a4c7-eb3895c1c156\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Title\"]}}],\"systemSeriesColors\": [{\"serieName\": \"sentiment count\",\"color\": \"#8C62F5\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 20403647-068e-49e1-9283-c8c515fb114f
+  - id: Viz_24
+    answer:
+      name: sentiment count by Title
+      tables:
+      - id: WS-Beauty Product Reviews
+        name: WS-Beauty Product Reviews
+      search_query: "[sentiment count] [Brand].Crest by [Title]"
+      answer_columns:
+      - name: sentiment count
+      - name: Title
+      table:
+        table_columns:
+        - column_id: Title
+          headline_aggregation: COUNT_DISTINCT
+        - column_id: sentiment count
+          headline_aggregation: SUM
+        ordered_column_ids:
+        - Title
+        - sentiment count
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: COLUMN
+        chart_columns:
+        - column_id: Title
+        - column_id: sentiment count
+        axis_configs:
+        - x:
+          - Title
+          "y":
+          - sentiment count
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"responsiveLayoutPreference\": \"AUTO_ON\",\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"sentiment count\",\"columnProperty\": {}},{\"columnId\": \"Title\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"e017ac87-5726-4abd-91e7-f5e3f754370d\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"sentiment count\"],\"isOpposite\": false}},{\"id\": \"6e7ae6b5-2e0b-4e1c-8702-c80e8acab56c\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Title\"]}}],\"systemSeriesColors\": [{\"serieName\": \"sentiment count\",\"color\": \"#FF8142\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: 2cca3f25-076e-400f-a44f-7942aaa95cd2
+  layout:
+    tiles:
+    - visualization_id: Viz_6
+      x: 0
+      "y": 15
+      height: 8
+      width: 6
+    - visualization_id: Viz_2
+      x: 0
+      "y": 0
+      height: 3
+      width: 2
+    - visualization_id: Viz_16
+      x: 6
+      "y": 33
+      height: 5
+      width: 6
+    - visualization_id: Viz_12
+      x: 0
+      "y": 6
+      height: 3
+      width: 4
+    - visualization_id: Viz_15
+      x: 4
+      "y": 4
+      height: 5
+      width: 8
+    - visualization_id: Viz_13
+      x: 0
+      "y": 3
+      height: 3
+      width: 4
+    - visualization_id: Viz_7
+      x: 0
+      "y": 33
+      height: 5
+      width: 6
+    - visualization_id: Viz_11
+      x: 6
+      "y": 15
+      height: 8
+      width: 6
+    - visualization_id: Viz_1
+      x: 8
+      "y": 0
+      height: 4
+      width: 4
+    - visualization_id: Viz_9
+      x: 2
+      "y": 0
+      height: 3
+      width: 2
+    - visualization_id: Viz_4
+      x: 6
+      "y": 38
+      height: 10
+      width: 6
+    - visualization_id: Viz_10
+      x: 0
+      "y": 9
+      height: 6
+      width: 12
+    - visualization_id: Viz_3
+      x: 4
+      "y": 0
+      height: 4
+      width: 4
+    - visualization_id: Viz_8
+      x: 0
+      "y": 48
+      height: 8
+      width: 12
+    - visualization_id: Viz_5
+      x: 0
+      "y": 23
+      height: 10
+      width: 12
+    - visualization_id: Viz_14
+      x: 0
+      "y": 38
+      height: 10
+      width: 6

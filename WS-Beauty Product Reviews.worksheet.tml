@@ -1,0 +1,108 @@
+guid: ff60e733-fb49-4f2c-a220-5d827add3992
+worksheet:
+  name: WS-Beauty Product Reviews
+  tables:
+  - name: BEAUTY_PRODUCT_REVIEWS
+  table_paths:
+  - id: BEAUTY_PRODUCT_REVIEWS_1
+    table: BEAUTY_PRODUCT_REVIEWS
+    join_path:
+    - {}
+  formulas:
+  - name: sentiment count
+    expr: "count ( [BEAUTY_PRODUCT_REVIEWS_1::Vader Analysis] )"
+    was_auto_generated: false
+  worksheet_columns:
+  - name: Review Bin
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::review_bin
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Review Group
+      - Review Category
+      is_hidden: true
+      synonym_type: AUTO_GENERATED
+  - name: Date
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::Date
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+      synonyms:
+      - Day
+      - Month
+      calendar: calendar
+      synonym_type: AUTO_GENERATED
+  - name: Overall
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::overall
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Rating
+      - Score
+      synonym_type: AUTO_GENERATED
+  - name: Review Length
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::review_length
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Duration
+      - Length
+      synonym_type: AUTO_GENERATED
+  - name: Reviewtext
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::reviewText
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Review Content
+      - Review Text
+      synonym_type: AUTO_GENERATED
+  - name: Title
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::title
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - product
+  - name: Brand
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::brand
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Label
+      - Manufacturer
+      synonym_type: AUTO_GENERATED
+  - name: Cleaned Reviews
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::Cleaned Reviews
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Sanitized Reviews
+      - Purified Reviews
+      synonym_type: AUTO_GENERATED
+  - name: Vader Sentiment
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::Vader Sentiment
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - sentiment
+      is_hidden: true
+  - name: Vader Analysis
+    column_id: BEAUTY_PRODUCT_REVIEWS_1::Vader Analysis
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - review type
+  - name: sentiment count
+    formula_id: sentiment count
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+  properties:
+    is_bypass_rls: false
+    join_progressive: true
